@@ -35,9 +35,13 @@ equals.addEventListener("click", () => {
     if (parseFloat(secondOperand) === 0) {
         display.textContent = "No Way!!!";
     }
+
+    else if (secondOperand === "") {
+        display.textContent = "Invalid Expression";
+    }
     else {
         result = operate(selectedOperator, parseFloat(firstOperand), parseFloat(secondOperand));
-        display.textContent = result;
+        display.textContent = result.toFixed(2);
     }
 
     console.log(firstOperand);
