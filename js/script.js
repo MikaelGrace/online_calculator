@@ -7,7 +7,9 @@ const display = document.querySelector(".display");
 const equals = document.querySelector(".equals");
 const operators = document.querySelectorAll(".operator");
 const clear = document.querySelector(".clear");
-//const decimalPoint = document.querySelector(".decimal-point");
+//const decimalPoint = document.querySelector(".digitpoint");
+
+//console.log(decimalPoint.textContent);
 
 clear.addEventListener("click", () => {
     firstOperand = "";
@@ -23,7 +25,13 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
-    display.textContent = operate(selectedOperator, firstOperand, secondOperand);
+    if (parseFloat(secondOperand) === 0) {
+        display.textContent = "No Way!!!";
+    }
+    else {
+        display.textContent = operate(selectedOperator, parseFloat(firstOperand), parseFloat(secondOperand));
+    }
+    
     firstOperand = "";
     secondOperand = "";
     selectedOperator = null;
@@ -35,12 +43,12 @@ digits.forEach ((digit) => {
         if (selectedOperator === null) {
             firstOperand += digit.textContent;
             //console.log(firstOperand);
-            firstOperand = parseInt(firstOperand);
+            //firstOperand = parseInt(firstOperand);
             display.textContent = firstOperand;
         }
         else {
             secondOperand += digit.textContent;
-            secondOperand = parseInt(secondOperand);
+            //secondOperand = parseInt(secondOperand);
             display.textContent = secondOperand;
         }
     })
