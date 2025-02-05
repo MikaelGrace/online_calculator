@@ -1,6 +1,8 @@
 let firstOperand = "";
 let selectedOperator = null;
 let secondOperand = "";
+let result;
+let intermediateResult;
 
 const digits = document.querySelectorAll(".digit");
 const display = document.querySelector(".display");
@@ -21,6 +23,11 @@ clear.addEventListener("click", () => {
 operators.forEach((operator) => {
     operator.addEventListener("click", () => {
         selectedOperator = operator.textContent;
+        if (secondOperand !== "") {
+            intermediateResult = operate(selectedOperator, parseFloat(firstOperand), parseFloat(secondOperand));
+            firstOperand = intermediateResult.toString();
+            secondOperand = "";
+        }
     });
 });
 
@@ -29,13 +36,20 @@ equals.addEventListener("click", () => {
         display.textContent = "No Way!!!";
     }
     else {
-        display.textContent = operate(selectedOperator, parseFloat(firstOperand), parseFloat(secondOperand));
+        result = operate(selectedOperator, parseFloat(firstOperand), parseFloat(secondOperand));
+        display.textContent = result;
     }
+
+    console.log(firstOperand);
+    console.log(selectedOperator);
+    console.log(secondOperand);
     
     firstOperand = "";
     secondOperand = "";
     selectedOperator = null;
+    result = 0;
     //console.log(operate(selectedOperator, firstOperand, secondOperand));
+    
 });
 
 digits.forEach ((digit) => {
